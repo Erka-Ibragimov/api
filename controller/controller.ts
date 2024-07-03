@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Service } from "../service/service";
+import service from "../service/service";
 import { ApiError } from "../exeptions/api-error";
 import { validationResult } from "express-validator";
 import { join } from "path";
@@ -15,7 +15,7 @@ export class Controller {
 
       const { email, password } = req.body;
 
-      const user = await new Service().signup(email, password);
+      const user = await service.signup(email, password);
 
       res.cookie(
         "access_token",
@@ -44,7 +44,7 @@ export class Controller {
       const { email, password } = req.body;
       const { refresh_token } = req.cookies;
 
-      const user = await new Service().signin(email, password, refresh_token?.sessionId);
+      const user = await service.signin(email, password, refresh_token?.sessionId);
 
       res.cookie(
         "access_token",
@@ -68,7 +68,7 @@ export class Controller {
     try {
       const { access_token } = req.cookies;
 
-      const me = await new Service().me(access_token.accessToken);
+      const me = await service.me(access_token.accessToken);
 
       res.send({ id: me.id, email: me.email });
     } catch (e) {
@@ -82,7 +82,7 @@ export class Controller {
 
       if (!refresh_token) return next(new ApiError(401, "Пользователь не авторизован"));
 
-      const delToken = await new Service().logout(refresh_token.refreshToken);
+      const delToken = await service.logout(refresh_token.refreshToken);
 
       res.clearCookie("access_token");
       res.clearCookie("refresh_token");
@@ -99,7 +99,7 @@ export class Controller {
 
       if (!refresh_token) return next(new ApiError(401, "Пользователь не авторизован"));
 
-      const session = await new Service().refresh(refresh_token.refreshToken, refresh_token.sessionId);
+      const session = await service.refresh(refresh_token.refreshToken, refresh_token.sessionId);
 
       res.cookie(
         "access_token",
@@ -132,7 +132,7 @@ export class Controller {
         encoding: req.file.encoding,
       };
 
-      const post = await new Service().addFile(userId, data);
+      const post = await service.addFile(userId, data);
 
       res.send(post);
     } catch (e) {
@@ -154,7 +154,7 @@ export class Controller {
         encoding: req.file.encoding,
       };
 
-      const post = await new Service().updateFile(Number(id), data);
+      const post = await service.updateFile(Number(id), data);
 
       res.send(post);
     } catch (e) {
@@ -168,7 +168,7 @@ export class Controller {
 
       if (!id) return next(new ApiError(404, "Не верные параметры"));
 
-      const post = await new Service().deleteFile(Number(id));
+      const post = await service.deleteFile(Number(id));
 
       res.send(post);
     } catch (e) {
@@ -180,7 +180,7 @@ export class Controller {
     try {
       const { take, page } = req.query;
 
-      const post = await new Service().getAllFiles(Number(take) || 10, Number(page) || 1);
+      const post = await service.getAllFiles(Number(take) || 10, Number(page) || 1);
 
       res.send(post);
     } catch (e) {
@@ -194,7 +194,7 @@ export class Controller {
 
       if (!id) return next(new ApiError(404, "Не верные параметры"));
 
-      const post = await new Service().getOneFile(Number(id));
+      const post = await service.getOneFile(Number(id));
 
       res.send(post);
     } catch (e) {
@@ -204,7 +204,7 @@ export class Controller {
 
   async getAllUsers(_: Request, res: Response, next: Function) {
     try {
-      const users = await new Service().getAllUsers();
+      const users = await service.getAllUsers();
 
       res.send(users);
     } catch (e) {
@@ -218,7 +218,7 @@ export class Controller {
 
       if (!id) return next(new ApiError(404, "Не верные параметры"));
 
-      const post = await new Service().getOneFile(Number(id));
+      const post = await service.getOneFile(Number(id));
 
       if (!post) {
         return res.send(null);

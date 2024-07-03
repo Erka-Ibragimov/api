@@ -25,6 +25,7 @@ app.use(middleError);
 const start = async () => {
   try {
     await AppDataSource.initialize();
+
     app.listen(PORT, () => {
       console.log(`Listening on port ${PORT}`);
     });

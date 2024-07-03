@@ -12,7 +12,7 @@ router.post("/signup", body("email").isEmail(), controller.signup);
 router.post("/signin", body("email").isEmail(), controller.signin);
 router.get("/file/list", authMiddle, controller.getAllFiles);
 router.get("/file/:id", authMiddle, controller.getOneFile);
-router.post("/file/upload ", authMiddle, upload.single("file"), controller.addFile);
+router.post("/file/upload", authMiddle, upload.single("file"), controller.addFile);
 router.put("/file/update/:id", authMiddle, upload.single("file"), controller.updateFile);
 router.delete("/file/delete/:id", authMiddle, controller.deleteFile);
 router.get("/file/download/:id", authMiddle, controller.downloadFile);

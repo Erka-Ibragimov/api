@@ -25,6 +25,7 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback): void => {
   const exit = file.mimetype.split("/")[1];
+
   if (exit !== "pdf" && exit !== "png" && exit !== "jpg" && exit !== "jpeg") {
     cb(new Error("Можно вводить pdf, png, jpg, jpeg"));
   } else {

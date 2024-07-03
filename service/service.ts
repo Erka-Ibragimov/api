@@ -9,7 +9,7 @@ import { Post } from "../module/posts";
 import { unlink } from "fs";
 import { join } from "path";
 
-export class Service {
+class Service {
   async signup(email: string, password: string) {
     const userRepository = AppDataSource.getRepository(User);
 
@@ -108,7 +108,13 @@ export class Service {
       id: userId,
     });
 
-    if (!user) throw new ApiError(400, "Такого пользователя не существует");
+    if (!user) {
+      unlink(join(__dirname, "../upload", data.fileName), (err) => {
+        if (err) throw new ApiError(404, "Файл не найден");
+      });
+
+      throw new ApiError(404, "Такого пользователя не существует");
+    }
 
     const postRepository = AppDataSource.getRepository(Post);
 
@@ -263,3 +269,4 @@ export class Service {
     return await validateAccesseToken(token);
   }
 }
+export default new Service();
