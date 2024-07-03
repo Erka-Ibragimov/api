@@ -5,6 +5,8 @@ import { validationResult } from "express-validator";
 import { join } from "path";
 
 export class Controller {
+  constructor() {}
+
   async signup(req: Request, res: Response, next: Function) {
     try {
       const errors = validationResult(req);

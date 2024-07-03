@@ -11,7 +11,11 @@ import { middleError } from "./middlewares/error";
 const PORT: number = Number(process.env.PORT) || 5000;
 const app: Express = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(json());
 app.use("/file", express.static(path.join(__dirname, "./upload/")));
 app.use(cookieParser());
