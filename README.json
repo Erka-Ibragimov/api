@@ -1,0 +1,152 @@
+{
+    "register": {
+        "method": "POST",
+        "url": "http://localhost:4000/api/registration",
+        "request": {
+            "name": "qwert",
+            "email": "qwert@mail.ru",
+            "password": "123"
+        },
+        "response": {
+            "user": {
+                "email": "qwert@mail.ru",
+                "id": 1,
+                "name": "qwert",
+                "createdAt": "2023-05-21T19:01:58.492Z",
+                "updatedAt": "2023-05-21T19:01:58.492Z"
+            },
+            "token": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ6ZXhjQG1haWwucnUiLCJuYW1lIjoiRXJraW4iLCJpYXQiOjE2ODQ2OTU3MTgsImV4cCI6MTY4NDY5NTgzOH0.eEvEWzY-oeE8ojEC9VBLgHVqozAEXLHXAffAaJxkY70",
+                "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ6ZXhjQG1haWwucnUiLCJuYW1lIjoiRXJraW4iLCJpYXQiOjE2ODQ2OTU3MTgsImV4cCI6MTY4NzI4NzcxOH0.yARZ6uXIdW0bKVTrquJH22spk_SrdGRy3ergtRCJM3o",
+                "createdAt": "2023-05-21T19:01:58.525Z",
+                "id": 1,
+                "userId": 1
+            }
+        }
+    },
+    "login": {
+        "method": "POST",
+        "url": "http://localhost:4000/api/login",
+        "request": {
+            "email": "qwerty@mail.ru",
+            "password": "123"
+        },
+        "response": {
+            "user": {
+                "email": "zxc@mail.ru",
+                "id": 1,
+                "name": "Erkin",
+                "createdAt": "2023-05-21T18:30:49.253Z",
+                "updatedAt": "2023-05-21T18:30:49.253Z"
+            },
+            "token": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ6eGNAbWFpbC5ydSIsIm5hbWUiOiJFcmtpbiIsImlhdCI6MTY4NDY5Mzg2OCwiZXhwIjoxNjg0NjkzOTg4fQ.CZMx0sQZ6xS6D8mBH8SD_jXjwvPkK0C-LiwUN9z4VOg",
+                "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ6eGNAbWFpbC5ydSIsIm5hbWUiOiJFcmtpbiIsImlhdCI6MTY4NDY5Mzg2OCwiZXhwIjoxNjg3Mjg1ODY4fQ.5y8aZ_E7QkkOLwqPAYWUB02-Ih6ZfwzaJtOCcRo489k",
+                "createdAt": "2023-05-21T18:30:49.279Z",
+                "updatedAt": "2023-05-21T18:31:08.973Z",
+                "id": 1,
+                "userId": 1
+            }
+        }
+    },
+    "addPost": { // send by form data
+        "method": "POST",
+        "url": "http://localhost:4000/api/add-post",
+        "request": {
+            "text": "qwe",
+            "userId": 3,
+            "file": "send by form data" // не обязательное поле
+        },
+        "response": {
+            "id": 2,
+            "text": "qwe",
+            "createdAt": "2023-05-21T19:17:44.094Z",
+            "updatedAt": "2023-05-21T19:17:44.094Z",
+            "name": "qwert",
+            "email": "zexwc@mail.ru",
+            "file": "file-28.05.2023-cli7bitgg0000acv12i1g1xin.jpeg"
+        }
+    },
+    "removePost": {
+        "method": "POST",
+        "url": "http://localhost:4000/api/delete-post",
+        "request": {
+            "id": 6
+        },
+        "response": true
+    },
+    "updatePost": {
+        "method": "POST",
+        "url": "http://localhost:4000/api/update-post",
+        "request": {
+            "text": "zxczxczxc",
+            "id": 1
+        },
+        "response": {
+            "id": 5,
+            "text": "zxczxczxczxczxczxczxczxc",
+            "createdAt": "2023-05-21T20:48:30.135Z",
+            "updatedAt": "2023-05-21T20:48:37.447Z",
+            "name": "Erkin",
+            "email": "zeex343dwc@mail.ru",
+            "userId": 8
+        }
+    },
+    "allPosts": {
+        "method": "GET",
+        "url": "http://localhost:4000/api/all-posts?take=3&page=1",
+        "response": [{
+                "id": 1,
+                "created_at": "2023-05-21T18:31:27.915Z",
+                "updated_at": "2023-05-21T18:31:27.915Z",
+                "text": "zxc",
+                "user": {
+                    "id": 1,
+                    "name": "Erkin",
+                    "email": "zxc@mail.ru"
+                }
+            },
+            {
+                "id": 2,
+                "created_at": "2023-05-21T19:17:44.094Z",
+                "updated_at": "2023-05-21T19:17:44.094Z",
+                "text": "qwe",
+                "user": {
+                    "id": 3,
+                    "name": "Erkin",
+                    "email": "zexwc@mail.ru"
+                }
+            },
+            {
+                "id": 3,
+                "created_at": "2023-05-21T19:21:23.605Z",
+                "updated_at": "2023-05-21T19:21:44.646Z",
+                "text": "zxczxczxczxczxczxczxczxc",
+                "user": {
+                    "id": 5,
+                    "name": "Erkin",
+                    "email": "zex4dwc@mail.ru"
+                }
+            }
+        ]
+    },
+    "logout": {
+        "method": "POST",
+        "url": "http://localhost:4000/api/logout",
+        "request": {
+            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ6ZXhjQG1haWwucnUiLCJuYW1lIjoiRXJraW4iLCJpYXQiOjE2ODQ2OTU3MTgsImV4cCI6MTY4NzI4NzcxOH0.yARZ6uXIdW0bKVTrquJH22spk_SrdGRy3ergtRCJM3o"
+        },
+        "response": true
+    },
+    "refresh": {
+        "method": "POST",
+        "url": "http://localhost:4000/api/refresh",
+        "request": {
+            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ6ZXhjQG1haWwucnUiLCJuYW1lIjoiRXJraW4iLCJpYXQiOjE2ODQ2OTU3MTgsImV4cCI6MTY4NzI4NzcxOH0.yARZ6uXIdW0bKVTrquJH22spk_SrdGRy3ergtRCJM3o"
+        },
+        "response": {
+            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkVya2luIiwiZW1haWwiOiJ6ZXhjQG1haWwucnUiLCJpYXQiOjE2ODQ2OTU3MzEsImV4cCI6MTY4NDY5NTg1MX0.mZvTKZI1Zzqs4gWZ2VBzozNnoOZeIrb4dih9cP4iNWY",
+            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkVya2luIiwiZW1haWwiOiJ6ZXhjQG1haWwucnUiLCJpYXQiOjE2ODQ2OTU3MzEsImV4cCI6MTY4NzI4NzczMX0.i_Qnb-o8Ak1Po5TQLl3nau3drcLaBKkghGfLIbqovK0"
+        }
+    }
+}
