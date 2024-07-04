@@ -3,7 +3,11 @@ import { UserDto } from "../dto/user.dto";
 import { ApiError } from "../exeptions/api-error";
 import { User } from "../module/user-module";
 import { hash, compare } from "bcrypt";
-import { generateTokens, validateAccesseToken, validateRefreshToken } from "./generateToken";
+import {
+  generateTokens,
+  validateAccesseToken,
+  validateRefreshToken,
+} from "./generateToken";
 import { Session } from "../module/session";
 import { Post } from "../module/posts";
 import { unlink } from "fs";
@@ -30,7 +34,10 @@ class Service {
 
     const userDto = new UserDto(user);
 
-    const generateToken = generateTokens({ id: userDto.id, email: userDto.email });
+    const generateToken = generateTokens({
+      id: userDto.id,
+      email: userDto.email,
+    });
 
     const session = AppDataSource.getRepository(Session);
 
@@ -62,18 +69,20 @@ class Service {
 
     const userDto = new UserDto(existUser);
 
-    const generateToken = generateTokens({ id: userDto.id, email: userDto.email });
+    const generateToken = generateTokens({
+      id: userDto.id,
+      email: userDto.email,
+    });
 
     const session = AppDataSource.getRepository(Session);
 
-    const existToken = await session.findOneBy({
-      user: {
-        id: existUser.id,
+    const existToken = await session.findOne({
+      where: {
+        user: { id: existUser.id },
       },
-      id: sessionId,
     });
 
-    if (!existToken) {
+    if (!existToken || !sessionId) {
       const newToken = new Session();
 
       newToken.refreshToken = generateToken.refreshToken;
@@ -100,7 +109,13 @@ class Service {
 
   async addFile(
     userId: number,
-    data: { size: number; fileName: string; mimeType: string; originName: string; encoding: string }
+    data: {
+      size: number;
+      fileName: string;
+      mimeType: string;
+      originName: string;
+      encoding: string;
+    }
   ) {
     const userRepository = AppDataSource.getRepository(User);
 
@@ -132,7 +147,13 @@ class Service {
 
   async updateFile(
     id: number,
-    data: { size: number; fileName: string; mimeType: string; originName: string; encoding: string }
+    data: {
+      size: number;
+      fileName: string;
+      mimeType: string;
+      originName: string;
+      encoding: string;
+    }
   ) {
     const postRepository = AppDataSource.getRepository(Post);
 
